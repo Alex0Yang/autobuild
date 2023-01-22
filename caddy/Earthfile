@@ -25,7 +25,8 @@ build-caddy:
             --with github.com/porech/caddy-maxmind-geolocation \
             --with github.com/caddyserver/transform-encoder \
             --with github.com/caddyserver/replace-response \
-            --with github.com/imgk/caddy-trojan
+            --with github.com/imgk/caddy-trojan \
+            --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive
 
     SAVE ARTIFACT /caddy
 
@@ -61,7 +62,7 @@ build:
     
     CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
-    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${DATE_TAG}
+    SAVE IMAGE --push mritd/caddy:latest clareyang/cloud_dev:caddy-${VERSION} clareyang/cloud_dev:caddy-${VERSION}-${DATE_TAG}
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
